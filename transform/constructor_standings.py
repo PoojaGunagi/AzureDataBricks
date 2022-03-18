@@ -49,6 +49,10 @@ r_df.write.mode("Overwrite").parquet("/mnt/adls27/transform/constructor_standing
 
 # COMMAND ----------
 
+r_df.write.mode("Overwrite").format("parquet").saveAsTable("f1_transform.constructor_standing_tb")
+
+# COMMAND ----------
+
 # MAGIC %fs
 # MAGIC ls /mnt/adls27/transform/constructor_standing/
 
