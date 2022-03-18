@@ -110,7 +110,15 @@ select_df.write.mode("Overwrite").parquet("/mnt/adls27/transform/join/")
 
 # COMMAND ----------
 
+select_df.write.mode("Overwrite").mode("parquet").saveAsTable("f1_processed.d")
+
+# COMMAND ----------
+
 select_df.write.mode("Overwrite").format("parquet").saveAsTable("f1_transform.join_result_tb")
+
+# COMMAND ----------
+
+
 
 # COMMAND ----------
 
@@ -153,6 +161,10 @@ r_df.write.mode("Overwrite").parquet("/mnt/adls27/transform/driver/")
 
 # COMMAND ----------
 
+r_df.write.mode("Overwrite").format("parquet").saveAsTable("f1_transform.driver_tb")
+
+# COMMAND ----------
+
 # MAGIC %fs
 # MAGIC ls dbfs:/mnt/adls27/transform/driver/
 
@@ -173,4 +185,5 @@ display(results_join_df.select(col('race_Id'),col('race_name')))
 
 
 # COMMAND ----------
+
 
