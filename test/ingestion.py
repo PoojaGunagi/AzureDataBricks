@@ -75,8 +75,8 @@ final_df.write.mode("overwrite").parquet("/mnt/adls27/processed/circuits")
 
 # COMMAND ----------
 
-df=spark.read.format("parquet").load("dbfs:/mnt/adls27/processed/circuits/part-00000-tid-258877217456303440-3642010a-202b-49ea-8dc6-27f948473d1d-33-1-c000.snappy.parquet")
-display(df)
+df=spark.read.format("parquet").load("dbfs:/mnt/adls27/processed/circuits/part-00000-tid-7340051692086805783-606b80ed-b657-40c4-976b-ceb48faf8c50-16-1-c000.snappy.parquet")
+df.count()
 
 # COMMAND ----------
 
