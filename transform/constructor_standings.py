@@ -23,7 +23,7 @@ display(cons_standard_df)
 
 # COMMAND ----------
 
-display(driver_standard_df.filter("race_year=2020"))
+display(cons_standard_df.filter("race_year=2020"))
 
 # COMMAND ----------
 
@@ -94,4 +94,5 @@ display(results_join_df.select(col('race_Id'),col('race_name')))
 
 
 # COMMAND ----------
+
 

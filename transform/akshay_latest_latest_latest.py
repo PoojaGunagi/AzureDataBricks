@@ -110,7 +110,7 @@ select_df.write.mode("Overwrite").parquet("/mnt/adls27/transform/join/")
 
 # COMMAND ----------
 
-select_df.write.mode("Overwrite").mode("parquet").saveAsTable("f1_processed.d")
+select_df.write.mode("Overwrite").format("parquet").saveAsTable("f1_transform.join_result_tb")
 
 # COMMAND ----------
 
