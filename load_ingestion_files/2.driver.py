@@ -1,7 +1,5 @@
 # Databricks notebook source
-# MAGIC %sql
-# MAGIC create database if not exists f1_test
-# MAGIC location "/mnt/adls27/transformnew"
+
 
 # COMMAND ----------
 
@@ -60,7 +58,7 @@ final_df=driver_final_df.withColumn("data_source",lit(v_data_source))\
 
 # COMMAND ----------
 
-final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_test.driver_tb")
+final_df.write.mode("append").format("parquet").saveAsTable("f1_processed_new.driver_tb")
 
 # COMMAND ----------
 
@@ -70,7 +68,8 @@ final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_test.driver_t
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC select * from f1_processed_new.driver_tb
+# MAGIC select file_date,count(*) from f1_processed_new.driver_tb
+# MAGIC group by file_date
 
 # COMMAND ----------
 

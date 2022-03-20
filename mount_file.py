@@ -41,7 +41,7 @@ mount_adls("transform")
 
 # COMMAND ----------
 
-mount_adls("processedlnew")
+mount_adls("processednew")
 
 # COMMAND ----------
 
@@ -49,7 +49,7 @@ mount_adls("transformnew")
 
 # COMMAND ----------
 
-dbutils.fs.ls("dbfs:/mnt/adls27/processedlnew/")
+dbutils.fs.ls("dbfs:/mnt/adls27/processednew/")
 
 # COMMAND ----------
 

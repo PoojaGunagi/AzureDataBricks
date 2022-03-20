@@ -1,7 +1,6 @@
 -- Databricks notebook source
-
 CREATE DATABASE IF NOT EXISTS f1_processed_new
-location "/mnt/adls27/processedlnew"
+location "/mnt/adls27/processednew"
 
 -- COMMAND ----------
 
@@ -68,7 +67,12 @@ location "/mnt/adls27/processedlnew"
 -- COMMAND ----------
 
 -- MAGIC %python
--- MAGIC final_df.write.mode("Overwrite").format("parquet").saveAsTable("f1_processed_new.circuit_tb")
+-- MAGIC final_df.write.mode("append").format("parquet").saveAsTable("f1_processed_new.circuit_tb")
+
+-- COMMAND ----------
+
+select file_date, count(*) from f1_processed_new.circuit_tb
+group by file_date
 
 -- COMMAND ----------
 
