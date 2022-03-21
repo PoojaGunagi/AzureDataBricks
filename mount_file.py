@@ -29,6 +29,10 @@ def mount_adls(container):
 
 # COMMAND ----------
 
+dbutils.fs.unmount("/mnt/adls27/processedlatest")
+
+# COMMAND ----------
+
 mount_adls("raw")
 
 # COMMAND ----------
@@ -41,7 +45,7 @@ mount_adls("transform")
 
 # COMMAND ----------
 
-mount_adls("processednew")
+mount_adls("processedlatest")
 
 # COMMAND ----------
 
@@ -49,7 +53,7 @@ mount_adls("transformnew")
 
 # COMMAND ----------
 
-dbutils.fs.ls("dbfs:/mnt/adls27/processednew/")
+dbutils.fs.ls("dbfs:/mnt/adls27/processedlatest/")
 
 # COMMAND ----------
 

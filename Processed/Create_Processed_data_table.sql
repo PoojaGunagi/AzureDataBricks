@@ -4,7 +4,12 @@ location "/mnt/adls27/processed"
 
 -- COMMAND ----------
 
-desc database f1_processed
+CREATE DATABASE IF NOT EXISTS f1_processed_new
+location "/mnt/adls27/processedlatest"
+
+-- COMMAND ----------
+
+describe database  f1_processed_new
 
 -- COMMAND ----------
 
@@ -12,4 +17,5 @@ CREATE DATABASE IF NOT EXISTS f1_transform
 location "/mnt/adls27/transform"
 
 -- COMMAND ----------
+
 

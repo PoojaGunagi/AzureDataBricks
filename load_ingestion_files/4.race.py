@@ -1,4 +1,23 @@
 # Databricks notebook source
+# MAGIC %fs ls /mnt/adls27/processedlatest/
+
+# COMMAND ----------
+
+#%sql drop schema f1_processed_new
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC create database if not exists f1_processed_new
+# MAGIC location "/mnt/adls27/processedlatest/"
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC desc database f1_processed_new
+
+# COMMAND ----------
+
 # MAGIC %python
 # MAGIC dbutils.widgets.text("p_data_source","")
 # MAGIC v_data_source=dbutils.widgets.get("p_data_source")
@@ -58,8 +77,12 @@ transform_col_df.write.mode("append").partitionBy('race_year').format("parquet")
 
 # COMMAND ----------
 
-# MAGIC %sql select race_id, count(*) from f1_processed_new.race_tb
-# MAGIC group by race_id
+# MAGIC %sql select * from f1_processed_new.race_tb
+
+# COMMAND ----------
+
+# MAGIC %sql select file_date, count(race_id) from f1_processed_new.race_tb
+# MAGIC group by file_date
 
 # COMMAND ----------
 

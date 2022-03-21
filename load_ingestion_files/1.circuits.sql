@@ -1,6 +1,6 @@
 -- Databricks notebook source
 CREATE DATABASE IF NOT EXISTS f1_processed_new
-location "/mnt/adls27/processednew"
+location "/mnt/adls27/processedlatest"
 
 -- COMMAND ----------
 
@@ -71,8 +71,17 @@ location "/mnt/adls27/processednew"
 
 -- COMMAND ----------
 
+select * from f1_processed_new.circuit_tb
+
+-- COMMAND ----------
+
 select file_date, count(*) from f1_processed_new.circuit_tb
 group by file_date
+
+-- COMMAND ----------
+
+-- MAGIC %sql
+-- MAGIC --delete from parquet.`f1_processed_new.circuit_tb` where file_date='2021-03-21'
 
 -- COMMAND ----------
 
