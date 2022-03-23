@@ -53,6 +53,10 @@ mount_adls("transformnew")
 
 # COMMAND ----------
 
+mount_adls("demo")
+
+# COMMAND ----------
+
 dbutils.fs.ls("dbfs:/mnt/adls27/processedlatest/")
 
 # COMMAND ----------
