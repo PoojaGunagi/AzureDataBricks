@@ -62,4 +62,8 @@ mount_adls("demo")
 
 # COMMAND ----------
 
+mount_adls("delta")
+
+# COMMAND ----------
+
 
