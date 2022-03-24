@@ -57,7 +57,8 @@ mount_adls("demo")
 
 # COMMAND ----------
 
-dbutils.fs.ls("dbfs:/mnt/adls27/processedlatest/")
+# MAGIC %sql
+# MAGIC ---dbutils.fs.ls("dbfs:/mnt/adls27/processedlatest/")
 
 # COMMAND ----------
 
