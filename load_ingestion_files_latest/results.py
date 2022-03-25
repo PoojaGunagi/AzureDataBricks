@@ -39,6 +39,10 @@ spark.read.json("/mnt/adls27/raw/2021-03-28/results.json").createOrReplaceTempVi
 
 # COMMAND ----------
 
+spark.read.json("/mnt/adls27/raw/2021-04-18/results.json").createOrReplaceTempView("results_cutover_2")
+
+# COMMAND ----------
+
 # MAGIC %sql
 # MAGIC select raceId,count(1)
 # MAGIC from results_cutover_2
@@ -47,7 +51,7 @@ spark.read.json("/mnt/adls27/raw/2021-03-28/results.json").createOrReplaceTempVi
 
 # COMMAND ----------
 
-spark.read.json("/mnt/adls27/raw/2021-04-18/results.json").createOrReplaceTempView("results_cutover_2")
+
 
 # COMMAND ----------
 
@@ -151,28 +155,29 @@ result_final_df=final_df.select('result_id',
 
 # COMMAND ----------
 
-if (spark._jsparkSession.catalog().tableExists("f1_processed_new.result_tb")):
+"""if (spark._jsparkSession.catalog().tableExists("f1_processed_new.result_tb")):
     result_final_df.write.mode("Overwrite").inserInto("f1_processed_new.result_tb")
 else:
-    result_final_df.write.mode("Overwrite").partitionBy("race_id").format("parquet").saveAsTable("f1_processed_new.result_tb")
+    result_final_df.write.mode("Overwrite").partitionBy("race_id").format("parquet").saveAsTable("f1_processed_new.result_tb")"""
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC select file_date,count(*) from f1_processed_new.results_tb
-# MAGIC group by file_date
+#%sql
+#select file_date,count(*) from f1_processed_new.results_tb
+#group by file_date
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC select count(*) from f1_processed_new.results_tb
+  #%sql
+  #select count(*) from f1_processed_new.results_tb
+
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC select race_Id,count(*) from f1_processed_new.results_tb
-# MAGIC group by race_Id
-# MAGIC order by race_Id desc
+#%sql
+#select race_Id,count(*) from f1_processed_new.results_tb
+#group by race_Id
+#order by race_Id desc
 
 # COMMAND ----------
 

@@ -1,4 +1,8 @@
 -- Databricks notebook source
+create database if not exists
+
+-- COMMAND ----------
+
 use f1_processed;
 
 -- COMMAND ----------

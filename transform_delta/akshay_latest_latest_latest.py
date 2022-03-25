@@ -3,7 +3,32 @@
 
 # COMMAND ----------
 
-races_df = spark.read.parquet("/mnt/adls27/processed//races")
+# MAGIC %python
+# MAGIC dbutils.widgets.text("p_data_source","")
+
+# COMMAND ----------
+
+# MAGIC %python
+# MAGIC   dbutils.widgets.text("p_file_date","2021-04-18")
+# MAGIC v_file_date=dbutils.widgets.get("p_file_date")
+
+# COMMAND ----------
+
+# MAGIC %sql use f1_delta_ingest;
+
+# COMMAND ----------
+
+# MAGIC %fs
+# MAGIC ls
+
+# COMMAND ----------
+
+
+
+
+# COMMAND ----------
+
+races_df = spark.read.format("delta").load("/mnt/adls27/delta/race_tb")
 
 # COMMAND ----------
 
@@ -19,7 +44,7 @@ display(renamed_race_df)
 
 # COMMAND ----------
 
-circuits_df = spark.read.parquet("dbfs:/mnt/adls27/processed/circuits/")
+circuits_df = spark.read.format("delta").load("/mnt/adls27/delta/circuit_tb")
 
 # COMMAND ----------
 
@@ -35,7 +60,7 @@ display(circuits_renamed_df)
 
 # COMMAND ----------
 
-driver_df = spark.read.parquet("dbfs:/mnt/adls27/processed/driver/")
+driver_df = spark.read.format("delta").load("dbfs:/mnt/adls27/delta/driver_tb")
 
 # COMMAND ----------
 
@@ -51,7 +76,7 @@ display(driver_renamed_df)
 
 # COMMAND ----------
 
-constructors_df = spark.read.parquet("dbfs:/mnt/adls27/processed/constructors")
+constructors_df = spark.read.format("delta").load("dbfs:/mnt/adls27/delta/constructor_tb")
 
 # COMMAND ----------
 
@@ -59,7 +84,7 @@ display(constructors_df)
 
 # COMMAND ----------
 
-results_df = spark.read.parquet("/mnt/adls27/processed//results")
+results_df = spark.read.format("delta").load("/mnt/adls27/delta/result_tb")
 
 # COMMAND ----------
 
@@ -84,9 +109,25 @@ jo = circuits_renamed_df.join(renamed_race_df,circuits_renamed_df.circuit_id == 
 # COMMAND ----------
 
 
-results_join_df = result_renamed_df.join(jo,jo.race_id==result_renamed_df.race_id,"inner")\
+results_join_df = result_renamed_df.join(jo,jo.race_id==result_renamed_df.race_Id,"inner")\
 .join(driver_renamed_df,driver_renamed_df.driver_id==result_renamed_df.driver_Id,"inner")\
 .join(constructors_df,constructors_df.constructor_id==result_renamed_df.constructor_Id,"inner").drop(renamed_race_df.race_id).drop(renamed_race_df.time)
+
+# COMMAND ----------
+
+display(jo)
+
+# COMMAND ----------
+
+display(result_renamed_df)
+
+# COMMAND ----------
+
+display(driver_renamed_df)
+
+# COMMAND ----------
+
+display(renamed_race_df)
 
 # COMMAND ----------
 
@@ -106,19 +147,17 @@ display(select_df)
 
 # COMMAND ----------
 
-select_df.write.mode("Overwrite").parquet("/mnt/adls27/transform/join/")
+# MAGIC %sql create database if not exists f1_delta_transform
+# MAGIC location "/mnt/adls27/transformnew/"
 
 # COMMAND ----------
 
-select_df.write.mode("Overwrite").format("parquet").saveAsTable("f1_transform.join_result_tb")
+select_df.write.mode("Overwrite").format("delta").saveAsTable("f1_delta_transform.join_result_tb")
 
 # COMMAND ----------
 
-select_df.write.mode("Overwrite").format("parquet").saveAsTable("f1_transform.join_result_tb")
-
-# COMMAND ----------
-
-
+# MAGIC %sql
+# MAGIC select * from f1_delta_transform.join_result_tb
 
 # COMMAND ----------
 
@@ -161,12 +200,12 @@ r_df.write.mode("Overwrite").parquet("/mnt/adls27/transform/driver/")
 
 # COMMAND ----------
 
-r_df.write.mode("Overwrite").format("parquet").saveAsTable("f1_transform.driver_tb")
+r_df.write.mode("Overwrite").format("delta").saveAsTable("f1_delta_transform.driver_tb")
 
 # COMMAND ----------
 
 # MAGIC %fs
-# MAGIC ls dbfs:/mnt/adls27/transform/driver/
+# MAGIC ls dbfs:/mnt/adls27/transformnew/driver_tb/
 
 # COMMAND ----------
 

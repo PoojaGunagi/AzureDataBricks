@@ -56,4 +56,4 @@ final_df.write.mode("Overwrite").format("delta").saveAsTable("f1_delta_ingest.pi
 
 # COMMAND ----------
 
-
+# MAGIC %fs ls
