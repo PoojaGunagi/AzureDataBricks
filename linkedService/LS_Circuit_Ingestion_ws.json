@@ -1,0 +1,14 @@
+{
+	"name": "LS_Circuit_Ingestion_ws",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-4739583468854301.1.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/dcda20ae-72e7-4c04-ad70-f416a9ad6b1d/resourceGroups/test/providers/Microsoft.Databricks/workspaces/gunagi_is_love",
+			"existingClusterId": "0324-030733-mivuyxoa"
+		}
+	}
+}
